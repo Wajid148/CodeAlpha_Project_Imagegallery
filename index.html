@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full Screen Image Gallery with Proper Image Visibility">
+    <title>Full Screen Image Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Full-screen Gallery Styling */
+        .gallery-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        .gallery-header {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .gallery {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .gallery img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures the image is fully visible within the container */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+
+        /* Controls for Next/Prev */
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 3rem;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Thumbnail Navigation */
+        .gallery-nav {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .gallery-nav button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .gallery-nav button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-container">
+        <div class="gallery-header">
+            
+        </div>
+
+        <div class="gallery">
+            <img id="gallery-image" src="http://im.rediff.com/getahead/2017/dec/15alia-bhatt1.jpg" alt="Gallery Image">
+            <div class="controls">
+                <button class="prev" onclick="prevImage()">&#60;</button>
+                <button class="next" onclick="nextImage()">&#62;</button>
+            </div>
+        </div>
+
+        <div class="gallery-nav">
+            <button onclick="changeImage(0)">1</button>
+            <button onclick="changeImage(1)">2</button>
+            <button onclick="changeImage(2)">3</button>
+            <button onclick="changeImage(3)">4</button>
+            <button onclick="changeImage(4)">5</button>
+            <button onclick="changeImage(5)">6</button>
+            <button onclick="changeImage(6)">7</button>
+            <button onclick="changeImage(7)">8</button>
+            
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            'http://im.rediff.com/getahead/2017/dec/15alia-bhatt1.jpg',
+            'https://filmfare.wwmindia.com/photogallery/2023/nov/aliabhatt11699864879.jpg',
+            'https://i.pinimg.com/736x/1d/9c/47/1d9c474ae9eefa51a05f3f0f4cdd7e0a.jpg',
+            'https://i.pinimg.com/originals/e5/7c/39/e57c396f7d0106020779f13e6e5286ff.jpg',
+            'https://filmfare.wwmindia.com/content/2018/mar/25__monsoori_1521122480.jpg',
+            'https://i.pinimg.com/originals/f7/69/41/f769412b65a554f9dd1e59554c604741.jpg',
+            'https://i.pinimg.com/736x/ce/2b/09/ce2b09e93b4a3009ccd4305959f762e1.jpg',
+            'https://i.pinimg.com/originals/77/02/68/770268c3f4218a2147afa48af2107a51.jpg',
+        ];
+
+        let currentImageIndex = 0;
+
+        function updateImage() {
+            const imageElement = document.getElementById('gallery-image');
+            imageElement.src = images[currentImageIndex];
+            imageElement.src = images[currentImageIndex];
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateImage();
+        }
+
+        function changeImage(index) {
+            currentImageIndex = index;
+            updateImage();
+        }
+    </script>
+
+</body>
+</html>
